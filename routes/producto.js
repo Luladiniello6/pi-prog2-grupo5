@@ -9,4 +9,6 @@ router.get('/agregar', productController.create)
 
 router.get('/editar/:id', productController.edit)
 
+router.get('/search', productController.search)
+
 module.exports = router;

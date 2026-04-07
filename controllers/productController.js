@@ -13,6 +13,10 @@ const controller = {
     edit: function(req, res){
 
         res.render('product-edit')
+    },
+
+    search: function(req, res){
+        res.render('search-results')
     }
 }
 
