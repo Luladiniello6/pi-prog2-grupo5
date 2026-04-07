@@ -5,6 +5,8 @@ const productController = require('../controllers/productController');
 
 router.get('/', productController.index);
 
-router.get('/')
+router.get('/agregar', productController.create)
+
+router.get('/editar/:id', productController.edit)
 
 module.exports = router;
