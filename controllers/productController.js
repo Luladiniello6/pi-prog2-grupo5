@@ -3,7 +3,7 @@ const listaProductos = producto.productos;
 
 const controller = {
     index: function (req, res) {
-        res.render('product', {listaProductos })
+        res.render('index', {listaProductos })
     },
 
     create: function(req, res){
