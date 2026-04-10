@@ -1,5 +1,5 @@
 const index = require('../routes/index')
-const producto = require('../db/data');
+const producto = require('../localdata/data');
 const listaProductos = producto.productos; 
 
 const controller = {
