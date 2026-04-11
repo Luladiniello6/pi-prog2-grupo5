@@ -1,3 +1,6 @@
+const producto = require('../localdata/data');
+
+
 const  controller = {
     login: function (req, res){
         res.render('login');

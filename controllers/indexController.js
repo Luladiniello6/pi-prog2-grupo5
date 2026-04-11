@@ -4,7 +4,7 @@ const listaProductos = producto.productos;
 
 const controller = {
     index: function (req, res) {
-        res.render('index', {listaProductos })
+        res.render('index', {listaProductos: listaProductos })
     }}
 
 module.exports = controller; 
