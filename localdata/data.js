@@ -70,7 +70,7 @@ const data = {
             genero: 'Unisex',
             descripcion: 'Es una fragancia unisex, descrita explícitamente dulce, peligrosa y voluptuosa. Combina notas intensas de durazno de viña, naranja sanguina y cardamomo con un corazón de ron y davana, sobre una base seductora de sándalo y pachulí.',
             capacidad: 50,
-            foto: 'images/bitterpeach.jpg'
+            foto: 'images/bitterpeach.png'
         },
         {
             id: 10,
@@ -93,4 +93,4 @@ const data = {
     },
 }
 
-module.export = data;
+module.exports = data;
