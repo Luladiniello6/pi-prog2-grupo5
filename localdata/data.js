@@ -187,6 +187,6 @@ usuario: {
             email: 'usuario1@gmail.com',
                 fotoDePerfil: '/images/profile-default.png',
         },
-
+    }
 
 module.exports = data;
