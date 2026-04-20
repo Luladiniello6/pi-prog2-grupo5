@@ -1,5 +1,6 @@
 const producto = require('../localdata/data');
 const listaProductos = producto.productos; 
+const listaComentarios = producto.comentarios
 
 const productController = {
     producto: function (req, res) {

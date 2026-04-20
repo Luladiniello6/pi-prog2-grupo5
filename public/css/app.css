@@ -173,6 +173,11 @@ hr {
   color: var(--gray);
 }
 
+.imgProduct{
+  height: 250px;
+  object-fit: contain;
+}
+
 .product-box {
   background-color: #ffffff;
   border-radius: 5px;
@@ -439,6 +444,85 @@ hr {
   border: none;
   border: solid 1px var(--gray);
   padding: 0 15px;
+}
+
+.form-login {
+    background-color: #cbc6c5c1;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    height: 300px;
+}
+
+.form-login div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.botones-login {
+    padding-top: 80px;
+}
+
+.form-login a {
+    text-align: center;
+    text-decoration: none;
+    background-color: #000000;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    border-radius: 5px;
+    color: #cbc6c5c1;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.form-register {
+    background-color: #cbc6c5c1;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 470px;
+    margin-top: 10px;
+}
+
+.main-register h2 {
+    text-align: center;
+    background-color: #000000;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    border-radius: 5px;
+    color: #cbc6c5c1;
+    font-size: 25px;
+    border: 2px solid #cbc6c5c1;
+    margin-bottom: 20px;
+}
+
+.form-register div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.form-register a {
+    text-align: center;
+    text-decoration: none;
+    background-color: #000000;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    border-radius: 5px;
+    color: #cbc6c5c1;
+    font-size: 20px;
 }
 
 .error{
