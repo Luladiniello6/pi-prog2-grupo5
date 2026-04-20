@@ -1,7 +1,7 @@
 const producto = require('../localdata/data');
+const listaProductos = producto.productos; 
 
-
-const  controller = {
+const  userController = {
     login: function (req, res){
         res.render('login');
     },
@@ -11,9 +11,8 @@ const  controller = {
     },
 
     profile: function(req,res){
-        res.render('profile')
+        res.render('profile', {listaProductos: usuario})
     }
+};
 
-}
-
-module.exports = controller
+module.exports = userController;
