@@ -24,11 +24,11 @@
 						<% for( let i = 0; i < producto.comentarios.length; i++ ) { %>
 						
 							<article>
-								<img src="/<%= producto.comentarios.fotoUsuario %>" alt="">
+								<img src="<%= producto.comentarios[i].fotoUsuario %>" alt="">
 								<div> 
 									<p class="user">
-										<strong> <a href="/users/profile"><%= producto.comentarios.usuario %></a></strong>
-										<%= producto.comentarios.comentario %></p>
+										<strong> <a href="/users/profile"><%= producto.comentarios[i].usuario %></a></strong>
+										<%= producto.comentarios[i].comentario %></p>
 									</div>
 									
 								</article>
