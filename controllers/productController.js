@@ -1,11 +1,19 @@
-const producto = require('../localdata/data');
-const listaProductos = producto.productos; 
-const listaComentarios = producto.comentarios
+const data = require('../localdata/data');
+const listaProductos = data.productos; 
+const listaComentarios = data.comentarios
 
 const productController = {
     producto: function (req, res) {
-        let producto = data.productos[req.params.id];
-        res.render('product', {listaProductos: producto })
+        let idProducto = req.params.id;
+        let producto;
+
+        for(let i=0; i < listaProductos.length; i++)
+            if(listaProductos[i].id == idProducto){
+                producto =listaProductos[i]
+
+            }
+
+        res.render('product', {producto: producto })
     },
 
     agregarProducto: function(req, res){

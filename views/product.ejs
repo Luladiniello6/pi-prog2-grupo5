@@ -4,6 +4,7 @@
 <%- include('./partials/head') %>
 <body>
 	<%- include('./partials/header') %>
+	
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
@@ -13,20 +14,25 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="/images/products/<%= producto.foto %>" alt="<%= producto.nombre %>" class="product-detail-img">
+					<img src="/<%= producto.foto %>" alt="<%= producto.nombre %>" class="product-detail-img">
 					<p class="product-detail-description">
 						<%= producto.descripcion %> </p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
+
+						<% for( let i = 0; i < producto.comentarios.length; i++ ) { %>
+						
 							<article>
-								<img src="/images/users/<%= producto.comentarios[i].imagen %>" alt="">
+								<img src="/<%= producto.comentarios.fotoUsuario %>" alt="">
 								<div> 
 									<p class="user">
-										<strong> <a href="/users/profile"><%= producto.comentarios[i].usuario %></a></strong>
-										<%= producto.comentarios[i].comentario %></p>
-								</div>
-							</article>
+										<strong> <a href="/users/profile"><%= producto.comentarios.usuario %></a></strong>
+										<%= producto.comentarios.comentario %></p>
+									</div>
+									
+								</article>
+						<% } %>
 						
 					</section>
 					<form class="form" action="/" method="get">

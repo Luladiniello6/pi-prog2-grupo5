@@ -1,7 +1,7 @@
 const index = require('../routes/index')
-const producto = require('../localdata/data');
-const listaProductos = producto.productos; 
-const listaComentarios = producto.comentarios
+const data = require('../localdata/data');
+const listaProductos = data.productos; 
+const listaComentarios = data.comentarios
 
 const indexController = {
     index: function (req, res) {
