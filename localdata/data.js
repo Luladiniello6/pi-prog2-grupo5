@@ -187,6 +187,7 @@ const data = {
         email: 'braiangomez@gmail.com',
         fotoDePerfil: '/images/profile-default.png',
     }
+}
 module.exports = data;
 
 /* resolviendo conflictos de objeto literal */
