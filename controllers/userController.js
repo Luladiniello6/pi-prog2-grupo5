@@ -1,5 +1,6 @@
-const producto = require('../localdata/data');
-const listaProductos = producto.productos; 
+const data = require('../localdata/data');
+const listaProductos = data.productos;
+const Usuario = data.usuario
 
 const  userController = {
     login: function (req, res){
@@ -11,7 +12,12 @@ const  userController = {
     },
 
     profile: function(req,res){
-        res.render('profile', {listaProductos: usuario})
+        let usuario
+        res.render('profile', {usuario: Usuario,
+            listaProductos: listaProductos })
+    },
+    logout: function(req, res){
+        res.render('login')
     }
 };
 
