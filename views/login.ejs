@@ -13,21 +13,24 @@
 					<h2 class="products-title">Ingresar</h2>
 				</div>
 				<!-- Show the "ultimos" products -->
-				<div class="col-12">
-					<form action="/" method="get" class="loginform">
-						<div>
-							<label for="usuario">Usuario (Email):</label>
-							<input type="email" name="usuario" id="uduario" required>
-						</div>
-						<div>
-							<label for="contrasena">Contraseña:</label>
-							<input type="password" name="contrasena" id="contrasena" required>
-						</div>
-						<div class="recordarme-box">
-							<input type="checkbox" name="recordarme" id="recordarme">Recordarme
-						</div>
-						<button type="submit">Ingresar</button>
-				</div>
+
+				<form class="form-register" action="/" method="get">
+					<div>
+						<label for="username">Usuario (Email): </label>
+						<input type="email" name="usuario" id="uduario" required>
+					</div>
+		
+					<div>
+						<label for="contrasena">Contraseña:</label>
+						<input type="password" name="contrasena" id="contrasena" required>
+					</div>
+		
+					<div class="recordarme-box">
+						<input type="checkbox" name="recordarme" id="recordarme">Recordarme
+					</div>
+		
+					<button type="submit">Ingresar</button>
+					
 				</form>
 			</div>
 		</div>
