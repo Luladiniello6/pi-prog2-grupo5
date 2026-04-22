@@ -151,6 +151,11 @@ hr {
   border: 0px;
   cursor: pointer;
   font-size: 1em;
+  font-size: 1em;
+  font-family: 'Cinzel', serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
 }
 
 .logout:hover {
@@ -231,6 +236,13 @@ hr {
 
 .product-box_image {
   border-bottom: 1px solid var(--light-gray);
+  margin: 0 auto;
+
+}
+
+.product-box_image img {
+  height: 300px;
+  width: 300px;
 }
 
 .product-box_data {
@@ -638,4 +650,3 @@ textarea.form-input {
     padding: 10px;
   }
 }
-

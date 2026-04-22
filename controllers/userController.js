@@ -1,6 +1,6 @@
 const data = require('../localdata/data');
 const listaProductos = data.productos;
-const Usuario = data.usuario
+const usuario = data.usuario
 
 const  userController = {
     login: function (req, res){
@@ -12,8 +12,8 @@ const  userController = {
     },
 
     profile: function(req,res){
-        let usuario
-        res.render('profile', {usuario: Usuario,
+        res.render('profile', {
+            usuario: usuario,
             listaProductos: listaProductos })
     },
     logout: function(req, res){
