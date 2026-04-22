@@ -17,7 +17,7 @@ const productController = {
     },
 
     agregarProducto: function(req, res){
-        res.render('product-add', {listaProductos: producto.usuario} )
+        res.render('product-add', {listaProductos: data.usuario} )
     },
 
     editarProducto: function(req, res){
