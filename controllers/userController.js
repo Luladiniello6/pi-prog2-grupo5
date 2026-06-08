@@ -4,11 +4,15 @@ const usuario = data.usuario
 const bcrypt = require("bcryptjs");
 
 const  userController = {
-    login: function (req, res){
+    loginprocess: function (req, res){
+        let check = bcrypt.compareSync(body.contrasena, passEncriptada);
         res.render('login');
     },
+    login: function (req, res){
+        res.render('login')
+    },
 
-    register: function(req, res) {
+    registerprocess: function(req, res) {
         let { name, email, password } = req.body;
         let hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -23,6 +27,9 @@ const  userController = {
             .catch(function(error) {
                 console.log(error);
             });
+        res.render('register')
+    },
+    register: function(req, res){
         res.render('register')
     },
 
