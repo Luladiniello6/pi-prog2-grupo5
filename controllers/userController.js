@@ -1,13 +1,28 @@
 const data = require('../localdata/data');
 const listaProductos = data.productos;
 const usuario = data.usuario
+const bcrypt = require("bcryptjs");
 
 const  userController = {
     login: function (req, res){
         res.render('login');
     },
 
-    register: function (req, res){
+    register: function(req, res) {
+        let { name, email, password } = req.body;
+        let hashedPassword = bcrypt.hashSync(password, 10);
+
+        db.User.create({
+            name: name,
+            email: email,
+            password: hashedPassword
+        })
+            .then(function() {
+                return res.redirect("/");
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
         res.render('register')
     },
 
