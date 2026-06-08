@@ -28,6 +28,21 @@ const productController = {
     editarProducto: function (req, res) {
         res.render('product-edit', { usuario: usuario })
     },
+    search: function (req, res) {
+        let search = req.query.search;
+
+        db.Movie.findAll({
+            where: {
+                title: {
+                    search
+                }
+            }
+        })
+            .then(function (movies) {
+                return res.render("search-results", { movies });
+            });
+    }
+}
 }
 
 module.exports = productController;
