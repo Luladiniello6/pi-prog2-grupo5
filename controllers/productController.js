@@ -31,18 +31,18 @@ const productController = {
     search: function (req, res) {
         let search = req.query.search;
 
-        db.Movie.findAll({
+        db.producto.findAll({
             where: {
                 title: {
                     search
                 }
             }
         })
-            .then(function (movies) {
-                return res.render("search-results", { movies });
+            .then(function (producto) {
+                return res.render("search-results", { producto });
             });
     }
 }
-}
+
 
 module.exports = productController;
