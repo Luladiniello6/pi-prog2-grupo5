@@ -31,7 +31,7 @@ const productController = {
     search: function (req, res) {
         let search = req.query.search;
 
-        db.producto.findAll({
+        db.Producto.findAll({
             where: {
                 title: {
                     search
