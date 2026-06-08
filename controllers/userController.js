@@ -2,6 +2,8 @@ const data = require('../localdata/data');
 const listaProductos = data.productos;
 const usuario = data.usuario
 const bcrypt = require("bcryptjs");
+const db = require ("../database/models")
+
 
 const  userController = {
     loginprocess: function (req, res){
@@ -19,7 +21,7 @@ const  userController = {
         db.User.create({
             name: name,
             email: email,
-            password: hashedPassword
+            contrasenia: hashedPassword
         })
             .then(function() {
                 return res.redirect("/");
