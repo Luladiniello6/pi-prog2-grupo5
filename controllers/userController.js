@@ -13,13 +13,14 @@ const  userController = {
     },
 
     registerprocess: function(req, res) {
-        let { name, email, password } = req.body;
+        let { username, name, email, password } = req.body;
         let hashedPassword = bcrypt.hashSync(password, 10);
 
-        db.User.create({
+        data.User.create({
+            username: username,
             name: name,
             email: email,
-            password: hashedPassword
+            contrasenia: hashedPassword 
         })
             .then(function() {
                 return res.redirect("/");
