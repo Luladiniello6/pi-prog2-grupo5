@@ -1,13 +1,13 @@
-const index = require('../routes/index')
-const data = require('../localdata/data');
-const listaProductos = data.productos;
-const usuario = data.usuario;
+const db = require('../database/models');
 
 const indexController = {
     index: function (req, res) {
-        res.render('index', {
-            listaProductos: listaProductos,
-            usuario: usuario
+    db.Producto.findAll()
+        .then(function(productos) {
+            return res.render('index', { listaProductos: productos });
+        })
+        .catch(function(error) {
+            return res.send(error);
         });
     },
     resultados: function (req, res) {

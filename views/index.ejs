@@ -4,7 +4,7 @@
 <%- include("./partials/head") %>
 
 	<body>
-		<%- include("./partials/headerLogueado") %>
+		<%- include("./partials/header") %>
 
 		<!-- Banner -->
 		<div class="banner">
@@ -25,7 +25,7 @@
 						<section class="product-box">
 							<a href="/productos/detalle/<%=listaProductos[i].id%>">
 								<figure class="product-box_image">
-									<img src="<%= listaProductos[i].foto %>" alt="<%= listaProductos[i].nombre %>">
+									<img src="/<%= listaProductos[i].fotoDeImagen %>" alt="<%= listaProductos[i].nombre %>">
 								</figure>
 								<article class="product-box_data">
 									<h2>

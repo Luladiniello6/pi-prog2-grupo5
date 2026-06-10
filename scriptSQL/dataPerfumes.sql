@@ -4,10 +4,10 @@ USE dataPerfumes;
 
 CREATE TABLE usuarios(
 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-username VARCHAR(45) UNIQUE,
-email VARCHAR(1000) NOT NULL,
+username VARCHAR(45) not null,
+email VARCHAR(1000) NOT NULL unique,
 contrasenia  VARCHAR(1000) NOT NULL,
-fotoDePerfil VARCHAR(1000) NOT NULL,
+fotoDePerfil VARCHAR(1000) NOT NULl ,
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
@@ -40,11 +40,11 @@ FOREIGN KEY (idProducto) REFERENCES productos(id),
 FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
 
-INSERT INTO usuarios VALUES (DEFAULT, 'braiangomez@gmail.com', "proyecto",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO usuarios VALUES (DEFAULT, 'lourdesD@gmail.com', "proyecto1",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO usuarios VALUES (DEFAULT, 'IvanL@gmail.com', "proyecto2",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO usuarios VALUES (DEFAULT, 'ValentinV@gmail.com', "proyecto3",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO usuarios VALUES (DEFAULT, 'Lucas@gmail.com', "proyecto4",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO usuarios VALUES (DEFAULT, 'biran', 'braiangomez@gmail.com', "proyecto",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO usuarios VALUES (DEFAULT, 'lourdes', 'lourdesD@gmail.com', "proyecto1",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO usuarios VALUES (DEFAULT, 'ivan', 'IvanL@gmail.com', "proyecto2",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO usuarios VALUES (DEFAULT, 'valen', 'ValentinV@gmail.com', "proyecto3",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO usuarios VALUES (DEFAULT, 'lucas', 'Lucas@gmail.com', "proyecto4",'/images/profile-default.png', DEFAULT, DEFAULT, DEFAULT);
 
 INSERT INTO productos (id, idUsuario, nombre, fotoDeImagen, descripcion, createdAt, updatedAt, deletedAt)
 VALUES
