@@ -42,7 +42,9 @@ const  userController = {
             listaProductos: listaProductos })
     },
     logout: function(req, res){
-        res.render('login')
+        req.session.destroy();
+        res.clearCookie("userLogged");
+        teturn res.redirect("/")
     }
 };
 
