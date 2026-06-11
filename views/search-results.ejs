@@ -6,31 +6,50 @@
 	<body>
 		<%- include('./partials/headerLogueado') %>
 
-		<!-- Novedades -->
-		<div class="container products-wrapper">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="products-title">Resultados de búsqueda</h2>
-				</div>
-				<!-- Show the "ultimos" products -->
-				<% for (let i=0; i < productos.length; i++){ %>
+			<!-- Novedades -->
+			<div class="container products-wrapper">
+				<div class="row">
 					<div class="col-12">
-						<article class="resultado-box">
-							<img src="<%= productos[i].foto %>" alt="<%= productos[i].nombre %>">
-							<h2>
-								<%= productos[i].nombre %>
-							</h2>
-							<p>Descripcion: <%= productos[i].descripcion %>
-							</p>
-						</article>
+						<h2 class="products-title"> Resultados de búsqueda </h2>
 					</div>
-					<% } %>
-			</div>
-		</div>
+					<!-- Show the "ultimos" products -->
+					<% if (results.length> 0) %>
+						<% for (let i=0; i < results.length; i++){ %>
+							<div class="col-12">
+								<article class="resultado-box">
+									<a href="/products/detalle/<%= results[i].id %>"></a>
 
-		<!-- footer -->
-		<%- include("./partials/footer") %>
-			<!-- /footer -->
+									<img src="<%= productos[i].foto %>" alt="<%= productos[i].nombre %>">
+
+									<h2>
+										<%= productos[i].nombre %>
+									</h2>
+
+									<p>
+										Descripcion: <%= productos[i].descripcion %>
+									</p>
+
+									<p>
+										Cargado por:
+										<a href="/users/profile/<%= results[i].usuario.id %>">
+										</a>
+									</p>
+
+								</article>
+							</div>
+
+							<% } else { %>
+								<div class="col-12">
+									<p>No hay resultados para su criterio de busqueda</p>
+								</div>
+								<% } %>
+				</div>
+			</div>
+
+			<!-- footer -->
+			<%- include("./partials/footer") %>
+				<!-- /footer -->
 
 	</body>
+
 </html>

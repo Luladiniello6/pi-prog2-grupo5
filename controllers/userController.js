@@ -17,7 +17,9 @@ const userController = {
         //buscar el usuario por mail con un findOne();
 
         db.User.findOne({
-            where: [{ email: user.email }]
+            where: { 
+                email: user.email 
+            }
         })
 
             .then(function (usuarioDb) {
@@ -33,12 +35,14 @@ const userController = {
                         res.cookie("userLogged", usuarioDb, { maxAge: 600000 });
                     }
                     return res.redirect('/');
-                };
-
-
-
-
-
+                } else{
+                    return res.send("La contraseña es incorrecta")
+                }
+                });
+            }
+            .catch(function (err) {
+                console.log(err, "error")
+                return res.send(err)
             })
     },
     login: function (req, res) {
@@ -76,7 +80,6 @@ const userController = {
         req.session.destroy();
         res.clearCookie("userLogged");
         return res.redirect("/")
-    }
-};
+    };
 
 module.exports = userController;

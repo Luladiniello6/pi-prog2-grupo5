@@ -3,7 +3,11 @@ const listaProductos = data.productos;
 const listaComentarios = data.comentarios
 const usuario = data.usuario;
 
+const db = require('../database/models');
+const { Op } = require('sequelize');
+
 const productController = {
+
     producto: function (req, res) {
         let idProducto = req.params.id;
         let producto;
@@ -14,33 +18,48 @@ const productController = {
 
             }
 
-        res.render('product',
-            {
-                producto: producto,
-                usuario: usuario
-            })
+        res.render('product', {
+            producto: producto,
+            usuario: usuario
+        })
     },
 
     agregarProducto: function (req, res) {
-        res.render('product-add', { usuario: usuario })
+        res.render('product-add', {
+            usuario: usuario
+        })
     },
 
     editarProducto: function (req, res) {
-        res.render('product-edit', { usuario: usuario })
+        res.render('product-edit', {
+            usuario: usuario
+        })
     },
+
     search: function (req, res) {
+
         let search = req.query.search;
 
         db.Producto.findAll({
             where: {
-                title: {
-                    search
+                nombre: {
+                    [Op.like]: "%" + search + "%"
                 }
-            }
+            },
+            include: [
+                { association: "usuario" },
+                { association: "comentarios" }
+            ]
         })
-            .then(function (producto) {
-                return res.render("search-results", { producto });
+            .then(function (results) {
+                return res.render("search-results", {
+                    results: producto,
+                    search: search
+                });
             });
+            .catch(function (error) {
+                return res.send(error);
+            })
     }
 }
 

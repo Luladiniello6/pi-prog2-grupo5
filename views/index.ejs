@@ -4,45 +4,55 @@
 <%- include("./partials/head") %>
 
 	<body>
-		<%- include("./partials/header") %>
+		<!-- Header -->
+		<% if (locals.user !=undefined) { %>
+			<%- include("./partials/headerLogueado") %>
+				<% } else { %>
+					<%- include("./partials/header") %>
+						<%- include("./partials/header") %>
+							<% } %>
+								<!-- Header -->
 
-		<!-- Banner -->
-		<div class="banner">
-			<img src="images/bannerPagina.png" alt="Banner de ofertas">
-		</div>
-		<!-- /Banner -->
 
-		<!-- Novedades -->
-		<div class="container products-wrapper">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="products-title">Productos</h2>
-				</div>
-				<!-- Show the "ultimos" products -->
-				<% for( let i=0; i < listaProductos.length; i++ ) { %>
+								<!-- Banner -->
+								<div class="banner">
+									<img src="images/bannerPagina.png" alt="Banner de ofertas">
+								</div>
+								<!-- /Banner -->
 
-					<div class="col-12 col-sm-6 col-lg-3">
-						<section class="product-box">
-							<a href="/productos/detalle/<%=listaProductos[i].id%>">
-								<figure class="product-box_image">
-									<img src="/<%= listaProductos[i].fotoDeImagen %>" alt="<%= listaProductos[i].nombre %>">
-								</figure>
-								<article class="product-box_data">
-									<h2>
-										<%= listaProductos[i].nombre %>
-									</h2>
-									<p>Descripcion: <%= listaProductos[i].descripcion %>
-									</p>
-								</article>
-							</a>
-						</section>
-					</div>
-					<% } %>
-			</div>
-		</div>
+								<!-- Novedades -->
+								<div class="container products-wrapper">
+									<div class="row">
+										<div class="col-12">
+											<h2 class="products-title">Productos</h2>
+										</div>
+										<!-- Show the "ultimos" products -->
+										<% for( let i=0; i < listaProductos.length; i++ ) { %>
 
-		<!-- footer -->
-		<%- include("./partials/footer") %>
-			<!-- /footer -->
+											<div class="col-12 col-sm-6 col-lg-3">
+												<section class="product-box">
+													<a href="/productos/detalle/<%=listaProductos[i].id%>">
+														<figure class="product-box_image">
+															<img src="/<%= listaProductos[i].fotoDeImagen %>"
+																alt="<%= listaProductos[i].nombre %>">
+														</figure>
+														<article class="product-box_data">
+															<h2>
+																<%= listaProductos[i].nombre %>
+															</h2>
+															<p>Descripcion: <%= listaProductos[i].descripcion %>
+															</p>
+														</article>
+													</a>
+												</section>
+											</div>
+											<% } %>
+									</div>
+								</div>
+
+								<!-- footer -->
+								<%- include("./partials/footer") %>
+									<!-- /footer -->
 	</body>
+
 </html>
