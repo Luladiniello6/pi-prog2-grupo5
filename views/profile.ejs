@@ -6,7 +6,7 @@
 	<body>
 
 		<!-- Header -->
-		<% if (locals.user !=undefined) { %>
+		<% if (locals.userLogged !=undefined) { %>
 			<%- include("./partials/headerLogueado") %>
 				<% } else { %>
 					<%- include("./partials/header") %>
@@ -22,7 +22,7 @@
 									<div class="data-container col-6">
 										<div class="d-flex align-items-center ">
 											<h1 class="main-title">
-												<%= usuario.nombre %>
+												<%= usuario.username %>
 											</h1>
 											<a class="btn mt-3 ml-4" href="">SEGUIR</a>
 										</div>
@@ -51,7 +51,7 @@
 											<section class="product-box">
 												<a href="/productos/detalle/<%=listaProductos[i].id%>">
 													<figure class="product-box_image">
-														<img src="/<%= listaProductos[i].foto %>"
+														<img src="/<%= listaProductos[i].fotoDeImagen %>"
 															alt="<%= listaProductos[i].nombre %>">
 													</figure>
 													<article class="product-box_data">

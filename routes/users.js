@@ -16,10 +16,10 @@ router.get('/register', userController.register);
 /* ruta por POST que procesa la informacion del formulario */
 router.post('/register', userController.registerprocess);
 
-router.get('/profile', userController.profile);
-router.post('/profile', userController.profileprocess)
+router.get('/profile/:id', userController.profile);
+//router.post('/profile', userController.profileprocess)
 
-router.get('/logout', userController.logout);
-router.post('/logout', userController.logoutprocess)
+router.post('/logout', userController.logout);
+//router.post('/logout', userController.logoutprocess)
 
 module.exports = router;

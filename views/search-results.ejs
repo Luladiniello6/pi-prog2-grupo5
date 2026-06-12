@@ -4,7 +4,14 @@
 <%- include('./partials/head') %>
 
 	<body>
-		<%- include('./partials/headerLogueado') %>
+				<!-- Header -->
+		<% if (locals.userLogged !=undefined) { %>
+			<%- include("./partials/headerLogueado") %>
+				<% } else { %>
+					<%- include("./partials/header") %>
+						
+							<% } %>
+								<!-- Header -->
 
 			<!-- Novedades -->
 			<div class="container products-wrapper">
@@ -13,30 +20,32 @@
 						<h2 class="products-title"> Resultados de búsqueda </h2>
 					</div>
 					<!-- Show the "ultimos" products -->
-					<% if (results.length> 0) %>
+					<% if (results.length> 0){ %>
 						<% for (let i=0; i < results.length; i++){ %>
 							<div class="col-12">
 								<article class="resultado-box">
 									<a href="/products/detalle/<%= results[i].id %>"></a>
 
-									<img src="<%= productos[i].foto %>" alt="<%= productos[i].nombre %>">
+									<img src="<%= results[i].fotoDeImagen %>" alt="<%= results[i].nombre %>">
 
 									<h2>
-										<%= productos[i].nombre %>
+										<%= results[i].nombre %>
 									</h2>
 
 									<p>
-										Descripcion: <%= productos[i].descripcion %>
+										Descripcion: <%= results[i].descripcion %>
 									</p>
 
 									<p>
 										Cargado por:
-										<a href="/users/profile/<%= results[i].usuario.id %>">
+										<!--<a href="/users/profile/<%= results[i].usuario.id %>"> -->
 										</a>
 									</p>
 
 								</article>
 							</div>
+
+							<% } %>
 
 							<% } else { %>
 								<div class="col-12">

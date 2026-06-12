@@ -1,8 +1,9 @@
-const data = require('../localdata/data');
-const listaProductos = data.productos;
-const usuario = data.usuario
+//const data = require('../localdata/data');
+//const listaProductos = data.productos;
+//const usuario = data.usuario
 const bcrypt = require("bcryptjs");
-const db = require("../database/models")
+const db = require("../database/models");
+const { Association } = require('sequelize');
 
 
 const userController = {
@@ -38,8 +39,8 @@ const userController = {
                 } else{
                     return res.send("La contraseña es incorrecta")
                 }
-                });
-            }
+                
+            })
             .catch(function (err) {
                 console.log(err, "error")
                 return res.send(err)
@@ -71,15 +72,25 @@ const userController = {
     },
 
     profile: function (req, res) {
-        res.render('profile', {
-            usuario: usuario,
-            listaProductos: listaProductos
+        db.User.findByPk(req.params.id, {
+            include: [{association:"productos"}]
         })
+        .then(function(usuario){
+            return res.render('profile', {
+                usuario: usuario,
+                listaProductos: usuario.productos
+            });
+        })
+        .catch(function(error){
+            return res.send(error);
+        });
     },
     logout: function (req, res) {
         req.session.destroy();
         res.clearCookie("userLogged");
         return res.redirect("/")
-    };
+    }
+
+};
 
 module.exports = userController;

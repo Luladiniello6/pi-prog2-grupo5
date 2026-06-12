@@ -53,10 +53,10 @@ const productController = {
         })
             .then(function (results) {
                 return res.render("search-results", {
-                    results: producto,
+                    results: results,
                     search: search
                 });
-            });
+            })
             .catch(function (error) {
                 return res.send(error);
             })
