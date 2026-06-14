@@ -5,6 +5,7 @@ const usuario = data.usuario;
 
 const db = require('../database/models');
 const { Op } = require('sequelize');
+const { validationResult } = require('express-validator');
 
 const productController = {
 
@@ -27,6 +28,31 @@ const productController = {
     agregarProducto: function (req, res) {
         res.render('product-add', {
             usuario: usuario
+        })
+    },
+
+    guardarProducto: function (req, res) {
+
+        if(!req.session.userLogged){
+            return res.redirect('/users/login');
+        }
+        let errores = validationResult(req);
+
+        if(!errores.isEmpty()){
+            return res.send(errores.mapped())
+        }
+
+        db.Producto.create({
+            idUsuario: req.session.userLogged.id,
+            nombre: req.body.nombre,
+            fotoDeImagen: req.body.foto,
+            descripcion: req.body.descripcion
+        })
+        .then(function(){
+            return res.redirect('/');
+        })
+        .catch(function(error) {
+            return res.send(error);
         })
     },
 
