@@ -10,19 +10,20 @@ const { validationResult } = require('express-validator');
 const productController = {
 
     producto: function (req, res) {
-        let idProducto = req.params.id;
-        let producto;
-
-        for (let i = 0; i < listaProductos.length; i++)
-            if (listaProductos[i].id == idProducto) {
-                producto = listaProductos[i]
-
-            }
-
-        res.render('product', {
-            producto: producto,
-            usuario: usuario
+        db.Producto.findByPk(req.params.id, {
+            include: [
+                { association: "usuario" },
+                { association: "comentarios" }
+            ]
         })
+            .then(function (producto) {
+                return res.render('product', {
+                    producto: producto
+                });
+            })
+            .catch(function (error) {
+                return res.send(error)
+            })
     },
 
     agregarProducto: function (req, res) {
@@ -76,6 +77,29 @@ const productController = {
             .catch(function (error) {
                 return res.send(error);
             })
+    },
+
+    actualizarProducto: function (req, res) {
+        if (!req.session.userLogged) {
+            return res.redirect('/users/login');
+        }
+        db.Producto.update({
+            nombre: req.body.nombre,
+            fotoDeImagen: req.body.foto,
+            descripcion: req.body.descripcion
+        },
+        {
+            where: {id: req.params.id}
+        })
+        .then(function(){
+            return res.redirect('/productos/detalle/' + req.params.id);
+
+        })
+        .catch(function(error){
+            return res.send(error)
+        })
+    
+
     },
 
     search: function (req, res) {

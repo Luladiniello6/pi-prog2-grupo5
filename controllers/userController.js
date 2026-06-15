@@ -65,7 +65,7 @@ const userController = {
             .catch(function (error) {
                 console.log(error);
             });
-        res.render('register')
+        
     },
     register: function (req, res) {
         res.render('register')

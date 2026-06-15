@@ -6,7 +6,8 @@ const productController = require('../controllers/productController');
 
 
 router.get('/detalle/:id', productController.producto);
-router.get('/agregarproducto',
+router.get('/agregarproducto', productController.agregarProducto)
+router.post('/agregarproducto',
     body('foto')
         .notEmpty()
         .withMessage('Debe ingresar el nombre de la imagen'),
@@ -19,7 +20,7 @@ router.get('/agregarproducto',
         .notEmpty()
         .withMessage('Debe  ingresar una descripcion'),
 
-    productController.agregarProducto);
+    productController.guardarProducto);
 
 router.get(
     '/editarproducto/:id', 
@@ -37,6 +38,8 @@ router.get(
     .withMessage('Debe ingresar una descripción'),
 
     productController.editarProducto);
+
+router.post('/editarproducto/:id', productController.actualizarProducto);
 
 router.get('/search-results', productController.search);
 
