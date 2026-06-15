@@ -57,8 +57,24 @@ const productController = {
     },
 
     editarProducto: function (req, res) {
-        res.render('product-edit', {
-            usuario: usuario
+
+        if(!req.session.userLogged){
+            return res.redirect('/users/login')
+        }
+
+        db.Producto.findByPk(req.params.id)
+
+        .then(function (producto) {
+            if(producto.idUsuario != req.session.userLogged.id){
+                return res.redirect('/');
+            }
+            return res.render('product-edit', {
+                producto: producto
+            });
+        })
+
+        .catch(function (error) {
+            return res.send(error);
         })
     },
 
@@ -86,6 +102,46 @@ const productController = {
             .catch(function (error) {
                 return res.send(error);
             })
+    },
+    guardarComentario: function (req, res) {
+        if(!req.session.userLogged){
+            return res.redirect('/users/login');
+        }
+
+        db.Comentario.create({
+            idUsuario: req.session.userLogged.id,
+            idProducto: req.params.id,
+            comentario: req.body.comentario
+        })
+        .then(function(){
+            return res.redirect('/productos/detalle/' + req.params.id);
+        })
+        .catch(function(error){
+            return res.send(error);
+        });
+    },
+
+    eliminarProducto: function (req, res) {
+        
+        if(!req.session.userLogged){
+            return res.redirect('/users/login');
+        }
+
+        db.Producto.findByPk(req.params.id)
+
+        .then(function (producto) {
+            if(!producto){
+                return res.redirect('/');
+            }
+            if(producto.idUsuario != req.session.userLogged.id){
+                return res.redirect('/');
+            }
+            return db.Producto.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+        })
     }
 }
 

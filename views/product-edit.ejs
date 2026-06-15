@@ -6,7 +6,7 @@
 	<body>
 		<!-- Header -->
 		<% if (locals.user !=undefined) { %>
-			<%- influde("./partials/headerLogueado") %>
+			<%- include("./partials/headerLogueado") %>
 				<% } else { %>
 					<%- include("./partials/header") %>
 						<% } %>
@@ -19,21 +19,24 @@
 										<h2 class="products-title">Editar datos del producto</h2>
 									</div>
 									<!-- Show the "ultimos" products -->
-									<form method="get" action="/" class="form-register">
+									<form method="post" action="/productos/editarproducto/<%= producto.id %>" class="form-register">
 										<div>
 											<label for="foto">Imagen:</label>
-											<input type="text" name="foto" id="foto">
+											<input type="text" name="foto" id="foto" value="<%= producto.fotoDeImagen %>" required>
 										</div>
+
 										<div>
 											<label for="nombre">Nombre:</label>
-											<input type="text" name="nombre" id="nombre">
+											<input type="text" name="nombre" id="nombre" value="<%= producto.nombre %>" required>
 										</div>
+
 										<div>
 											<label for="descripcion">Descripcion:</label>
-											<input type="text" name="descripcion" id="descripcion">
+											<input type="text" name="descripcion" id="descripcion" value="<%= producto.descripcion %>" required>
 										</div>
+
 										<div>
-											<button type="submit" class="boton">Enviar</button>
+											<button type="submit" class="boton">Guardar cambios</button>
 										</div>
 									</form>
 

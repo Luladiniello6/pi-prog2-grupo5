@@ -6,7 +6,7 @@
 	<body>
 		<!-- Header -->
 		<% if (locals.user !=undefined) { %>
-			<%- influde("./partials/headerLogueado") %>
+			<%- include("./partials/headerLogueado") %>
 				<% } else { %>
 					<%- include("./partials/header") %>
 						<% } %>
@@ -18,7 +18,16 @@
 									<h2 class="products-title">
 										<%= producto.nombre %>
 									</h2>
-									<a href="/productos/editarproducto" class="editar-link">Editar</a>
+									<% if(locals.user && locals.user.id==producto.idUsuario) { %>
+										<a href="/productos/editarproducto/<%= producto.id %>" class="editar-link">
+											Editar </a>
+										<form action="/productos/eliminarproducto/<%= producto.id %>" method="post">
+											<button type="submit">
+												Eliminar
+											</button>
+										</form>
+										<% } %>
+
 								</div>
 								<div class="product-detail">
 									<div class="row">
@@ -49,12 +58,20 @@
 													<% } %>
 
 											</section>
-											<form class="form" action="/" method="get">
-												<input class="form-input" type="text" value=""
-													placeholder="Agregar comentario">
-												<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-											</form>
-											<hr>
+
+											<% if(locals.user){%>
+												<form action="/productos/comentario/<%= producto.id %>" method="post">
+													<input class="form-input" type="text" name="comentario"
+														placeholder="Agregar comentario" required>
+													<button type="submit" class="buy-now-button">
+														Agregar comentario
+													</button>
+												</form>
+												<% } else { %>
+													<a href="/users/login">
+														Iniciar sesión para comentar
+													</a>
+													<% } %>
 										</div>
 									</div>
 								</div>

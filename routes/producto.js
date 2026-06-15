@@ -21,8 +21,32 @@ router.get('/agregarproducto',
 
     productController.agregarProducto);
 
-router.get('/editarproducto', productController.editarProducto);
+router.get(
+    '/editarproducto/:id', 
+    
+    body('foto')
+    .notEmpty()
+    .withMessage('Debe ingresar una imagen'),
 
-router.get('/search-results', productController.search)
+    body('nombre')
+    .notEmpty()
+    .withMessage('Debe ingresar un nombre'),
+
+    body('descripcion')
+    .notEmpty()
+    .withMessage('Debe ingresar una descripción'),
+
+    productController.editarProducto);
+
+router.get('/search-results', productController.search);
+
+router.post(
+    '/eliminarproducto/:id',
+    productController.eliminarProducto
+);
+router.post(
+    '/comentario/:id',
+    productController.guardarComentario
+);
 
 module.exports = router;
