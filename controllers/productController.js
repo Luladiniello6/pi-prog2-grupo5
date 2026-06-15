@@ -33,12 +33,12 @@ const productController = {
 
     guardarProducto: function (req, res) {
 
-        if(!req.session.userLogged){
+        if (!req.session.userLogged) {
             return res.redirect('/users/login');
         }
         let errores = validationResult(req);
 
-        if(!errores.isEmpty()){
+        if (!errores.isEmpty()) {
             return res.send(errores.mapped())
         }
 
@@ -48,34 +48,34 @@ const productController = {
             fotoDeImagen: req.body.foto,
             descripcion: req.body.descripcion
         })
-        .then(function(){
-            return res.redirect('/');
-        })
-        .catch(function(error) {
-            return res.send(error);
-        })
+            .then(function () {
+                return res.redirect('/');
+            })
+            .catch(function (error) {
+                return res.send(error);
+            })
     },
 
     editarProducto: function (req, res) {
 
-        if(!req.session.userLogged){
+        if (!req.session.userLogged) {
             return res.redirect('/users/login')
         }
 
         db.Producto.findByPk(req.params.id)
 
-        .then(function (producto) {
-            if(producto.idUsuario != req.session.userLogged.id){
-                return res.redirect('/');
-            }
-            return res.render('product-edit', {
-                producto: producto
-            });
-        })
+            .then(function (producto) {
+                if (producto.idUsuario != req.session.userLogged.id) {
+                    return res.redirect('/');
+                }
+                return res.render('product-edit', {
+                    producto: producto
+                });
+            })
 
-        .catch(function (error) {
-            return res.send(error);
-        })
+            .catch(function (error) {
+                return res.send(error);
+            })
     },
 
     search: function (req, res) {
@@ -104,7 +104,7 @@ const productController = {
             })
     },
     guardarComentario: function (req, res) {
-        if(!req.session.userLogged){
+        if (!req.session.userLogged) {
             return res.redirect('/users/login');
         }
 
@@ -113,35 +113,41 @@ const productController = {
             idProducto: req.params.id,
             comentario: req.body.comentario
         })
-        .then(function(){
-            return res.redirect('/productos/detalle/' + req.params.id);
-        })
-        .catch(function(error){
-            return res.send(error);
-        });
+            .then(function () {
+                return res.redirect('/productos/detalle/' + req.params.id);
+            })
+            .catch(function (error) {
+                return res.send(error);
+            });
     },
 
     eliminarProducto: function (req, res) {
-        
-        if(!req.session.userLogged){
+
+        if (!req.session.userLogged) {
             return res.redirect('/users/login');
         }
 
         db.Producto.findByPk(req.params.id)
 
-        .then(function (producto) {
-            if(!producto){
-                return res.redirect('/');
-            }
-            if(producto.idUsuario != req.session.userLogged.id){
-                return res.redirect('/');
-            }
-            return db.Producto.destroy({
-                where: {
-                    id: req.params.id
+            .then(function (producto) {
+                if (!producto) {
+                    return res.redirect('/');
                 }
+                if (producto.idUsuario != req.session.userLogged.id) {
+                    return res.redirect('/');
+                }
+                return db.Producto.destroy({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                    .then(function () {
+                        return res.redirect('/');
+                    })
+                    .catch(function (error) {
+                        return res.send(error);
+                    })
             })
-        })
     }
 }
 
