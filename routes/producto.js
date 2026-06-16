@@ -22,7 +22,9 @@ router.post('/agregarproducto',
 
     productController.guardarProducto);
 
-router.get(
+
+router.get('/editarproducto/:id',productController.editarProducto)
+router.post(
     '/editarproducto/:id', 
     
     body('foto')
@@ -37,9 +39,10 @@ router.get(
     .notEmpty()
     .withMessage('Debe ingresar una descripción'),
 
-    productController.editarProducto);
+    productController.actualizarProducto);
 
-router.post('/editarproducto/:id', productController.actualizarProducto);
+    
+
 
 router.get('/search-results', productController.search);
 

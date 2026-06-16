@@ -80,6 +80,13 @@ const productController = {
     },
 
     actualizarProducto: function (req, res) {
+        let errores = validationResult(req);
+        if (!errores.isEmpty()) {
+            return res.send(errores.mapped());
+        }
+
+
+
         if (!req.session.userLogged) {
             return res.redirect('/users/login');
         }
@@ -88,17 +95,17 @@ const productController = {
             fotoDeImagen: req.body.foto,
             descripcion: req.body.descripcion
         },
-        {
-            where: {id: req.params.id}
-        })
-        .then(function(){
-            return res.redirect('/productos/detalle/' + req.params.id);
+            {
+                where: { id: req.params.id }
+            })
+            .then(function () {
+                return res.redirect('/productos/detalle/' + req.params.id);
 
-        })
-        .catch(function(error){
-            return res.send(error)
-        })
-    
+            })
+            .catch(function (error) {
+                return res.send(error)
+            })
+
 
     },
 

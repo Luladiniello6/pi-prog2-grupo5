@@ -4,10 +4,15 @@
 const bcrypt = require("bcryptjs");
 const db = require("../database/models");
 const { Association } = require('sequelize');
+const { validationResult } = require('express-validator');
 
 
 const userController = {
     loginprocess: function (req, res) {
+        let errores = validationResult(req);
+        if (!errores.isEmpty()){
+            return res.send(errores.mapped())
+        }
 
         let user = {
             email: req.body.email,
@@ -18,14 +23,14 @@ const userController = {
         //buscar el usuario por mail con un findOne();
 
         db.User.findOne({
-            where: { 
-                email: user.email 
+            where: {
+                email: user.email
             }
         })
 
             .then(function (usuarioDb) {
                 if (usuarioDb == null) {
-                    return res.send("El email no stá registrado")
+                    return res.send("El email no está registrado")
 
                 }
                 let check = bcrypt.compareSync(user.pass, usuarioDb.contrasenia);
@@ -36,10 +41,10 @@ const userController = {
                         res.cookie("userLogged", usuarioDb, { maxAge: 600000 });
                     }
                     return res.redirect('/');
-                } else{
+                } else {
                     return res.send("La contraseña es incorrecta")
                 }
-                
+
             })
             .catch(function (err) {
                 console.log(err, "error")
@@ -51,6 +56,14 @@ const userController = {
     },
 
     registerprocess: function (req, res) {
+
+        let errores = validationResult(req);
+        if (!errores.isEmpty()) {
+            return res.send(errores.mapped());
+        }
+
+
+
         let { username, email, password } = req.body;
         let hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -65,7 +78,7 @@ const userController = {
             .catch(function (error) {
                 console.log(error);
             });
-        
+
     },
     register: function (req, res) {
         res.render('register')
@@ -73,17 +86,17 @@ const userController = {
 
     profile: function (req, res) {
         db.User.findByPk(req.params.id, {
-            include: [{association:"productos"}]
+            include: [{ association: "productos" }]
         })
-        .then(function(usuario){
-            return res.render('profile', {
-                usuario: usuario,
-                listaProductos: usuario.productos
+            .then(function (usuario) {
+                return res.render('profile', {
+                    usuario: usuario,
+                    listaProductos: usuario.productos
+                });
+            })
+            .catch(function (error) {
+                return res.send(error);
             });
-        })
-        .catch(function(error){
-            return res.send(error);
-        });
     },
     logout: function (req, res) {
         req.session.destroy();
