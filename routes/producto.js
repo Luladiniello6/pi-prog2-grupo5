@@ -8,9 +8,7 @@ const productController = require('../controllers/productController');
 router.get('/detalle/:id', productController.producto);
 router.get('/agregarproducto', productController.agregarProducto)
 router.post('/agregarproducto',
-    body('foto')
-        .notEmpty()
-        .withMessage('Debe ingresar el nombre de la imagen'),
+   
 
     body('nombre')
         .notEmpty()

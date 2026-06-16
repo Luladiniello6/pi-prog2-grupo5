@@ -10,7 +10,7 @@ const { validationResult } = require('express-validator');
 const userController = {
     loginprocess: function (req, res) {
         let errores = validationResult(req);
-        if (!errores.isEmpty()){
+        if (!errores.isEmpty()) {
             return res.send(errores.mapped())
         }
 
@@ -66,11 +66,17 @@ const userController = {
 
         let { username, email, password } = req.body;
         let hashedPassword = bcrypt.hashSync(password, 10);
+        let fotoPerfil = req.body.fotoDePerfil;
+
+        if (fotoPerfil == '' || fotoPerfil == undefined) {
+            fotoPerfil = 'images/fotoDePerfil.png';
+        }
 
         db.User.create({
             username: username,
             email: email,
-            contrasenia: hashedPassword
+            contrasenia: hashedPassword,
+            fotoDePerfil: fotoPerfil
         })
             .then(function () {
                 return res.redirect("/");

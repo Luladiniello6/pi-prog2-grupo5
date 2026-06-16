@@ -43,10 +43,12 @@ const productController = {
             return res.send(errores.mapped())
         }
 
+        
+
         db.Producto.create({
             idUsuario: req.session.userLogged.id,
             nombre: req.body.nombre,
-            fotoDeImagen: req.body.foto,
+            fotoDeImagen: req.body.foto == '' ? 'images/fotoDePerfil.png' : req.body.foto,
             descripcion: req.body.descripcion
         })
             .then(function () {
